@@ -1,0 +1,92 @@
+<ng-container *ngIf="client ; else noClientSelectedBlock">
+    <div class='panel panel-primary' *ngIf='client'>
+        <div class='panel-heading'>
+            {{pageTitle + ': ' + client.LastName}}
+        </div>
+
+        <div class='panel-body'>
+            <div class='row'>
+                <div class='col-md-8 col-lg-8'>
+                    <div class='row'>
+                        <div class='col-md-4'><b>First Name:</b></div>
+                        <div class='col-md-6'>{{client.FirstName }}</div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-md-4'><b>Last Name:</b></div>
+                        <div class='col-md-6'>{{client.LastName }}</div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-md-4'><b>Initials:</b></div>
+                        <div class='col-md-6'>{{ client.Initials }}</div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-md-4'><b>Gender:</b></div>
+                        <div class='col-md-6'>{{ client.Gender | gender}}</div>
+                    </div>
+                    <div class='row'>
+                        <hr>
+                        <div class='col-md-4'><b>Residential Address:</b></div>
+                        <div class='col-md-6'>
+                            <p>{{ getClientAddress(client.ResidentialAddress) }}</p>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <hr>
+                        <div class='col-md-4'><b>Work Address:</b></div>
+                        <div class='col-md-6'>
+                            <p>{{ getClientAddress(client.WorkAddress) }}</p>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <hr>
+                        <div class='col-md-4'><b>Postal Address:</b></div>
+                        <div class='col-md-6'>
+                            <p>{{ getClientAddress(client.PostalAddress) }}</p>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <hr>
+                        <div class='col-md-4'><b>Contact Numbers</b></div>
+                        <div class='col-md-6'>
+                            <ol>
+                                <li *ngFor="let contactNumber of client.ContactNumbers">{{ contactNumber }}</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='col-md-4 col-lg-4'>
+                    <ng-container *ngIf='client.PhotoUrl; else noPhotoProvidedcBlock'>
+                        <img class='center-block img-responsive' [style.width.px]='200' [style.margin.px]='2' [src]='client.PhotoUrl' [title]='client.FirstName'>
+                    </ng-container>
+                    <ng-template #noPhotoProvidedcBlock>
+                        <div *ngIf="client.Gender == 1">
+                            <img class='center-block img-responsive' src="assets/images/profile-photos/dummy/male.png">
+                        </div>
+                        <div *ngIf="client.Gender == 2">
+                            <img class='center-block img-responsive' src="assets/images/profile-photos/dummy/female.png">
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+        <div class='panel-footer'>
+            <a class='btn btn-default navigation-buttons' style='width:80px' (click)='onBack()'>
+                <i class='glyphicon glyphicon-chevron-left'></i> Back
+            </a>
+            <a class="btn btn-primary navigation-buttons" style="width:80px" [routerLink]="['/clients', client.Id, 'edit']">
+          Edit
+      </a>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #noClientSelectedBlock>
+    <div class="row">
+        <div class="col-lg-12" class="warning-text">
+            <p> Please select a client to view from the list <br> or <br> Create a client if non exists</p>
+        </div>
+    </div>
+</ng-template>

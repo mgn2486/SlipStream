@@ -1,0 +1,21 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <a class="navbar-brand">{{pageTitle}}</a>
+        <ul class="nav navbar-nav">
+            <li routerLinkActive="active">
+                <a routerLink='/home'>Home</a>
+            </li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a routerLink='/clients'>Clients List</a>
+            </li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a [routerLink]="['/clients', 0, 'edit']">Add Client</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a routerLink='/login'>Log In</a>
+            </li>
+        </ul>
+    </div>
+</nav>

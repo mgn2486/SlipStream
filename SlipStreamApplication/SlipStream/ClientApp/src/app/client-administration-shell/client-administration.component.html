@@ -1,0 +1,34 @@
+<div class="container">
+    <div class='row'>
+        <div class='col-md-12'>
+            <h3>
+                Slip-Stream Clients Admin
+            </h3>
+            <hr>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-4'>
+            <h4>
+                Total number of Clients: {{ listOfClients.length }}
+                <br>
+                <br>
+            </h4>
+        </div>
+
+    </div>
+
+    <div class='row'>
+        <div class='col-md-4'>
+            <h5>Clients list</h5>
+            <br>
+            <app-client-list [listOfClients]="listOfClients"></app-client-list>
+
+        </div>
+        <div class='col-md-8'>
+            <h5>Client Details</h5>
+            <br>
+            <app-client-details></app-client-details>
+        </div>
+    </div>
+</div>

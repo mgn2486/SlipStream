@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class='panel panel-primary'>
+            <div class='panel-heading'>
+                {{pageTitle}}
+            </div>
+            <div class='panel-body'>
+                <ng-container *ngIf="listOfClients && listOfClients.length > 0 ; else noClientsBlock">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button type='button' *ngFor='let client of listOfClients' (click)='onSelectedClient(client)' class="btn-outline-primary" [ngClass]="{' btn-outline-primary:active ': client?.Id === selectedClient?.Id}">
+                              {{ client.FirstName }} {{ client.LastName }} {{ client.Initials }}
+                        </button>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-template #noClientsBlock>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <P class="warning-text"> Sorry man there are no Clients loaded <br>Please create new clients</P>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <div class='panel-footer'>
+                    <a class="btn btn-primary navigation-buttons" [routerLink]="['/clients', 0, 'edit']">
+                      Create a New Client
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

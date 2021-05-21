@@ -1,0 +1,63 @@
+[{
+        "Id": "1",
+        "FirstName": "Massy",
+        "LastName": "Gomba",
+        "Initials": "MG",
+        "Gender": 1,
+        "PhotoUrl": "",
+        "ResidentialAddress": {
+            "BuildingNumber": "12",
+            "StreetName": "Umngeni Road ",
+            "Area": "House",
+            "Code": "Waterfall",
+            "Province": "KZN"
+        },
+        "WorkAddress": {
+            "BuildingNumber": "23 ",
+            "StreetName": "Ridge side avenue ",
+            "Area": "House",
+            "Code": "Lalucia",
+            "Province": "KZN"
+        },
+        "PostalAddress": {
+            "BuildingNumber": "12",
+            "StreetName": "Umngeni Road ",
+            "Area": "House",
+            "Code": "Waterfall",
+            "Province": "KZN"
+        },
+        "ContactNumbers": ["0987563873", "123123123123"]
+    },
+    {
+        "Id": "2",
+        "FirstName": "Mr Gee",
+        "LastName": "Ndadzibaya",
+        "Initials": "MG",
+        "Gender": 2,
+        "PhotoUrl": "",
+        "ResidentialAddress": {
+            "BuildingNumber": "12",
+            "StreetName": "Umngeni Road ",
+            "Area": "House",
+            "Code": "Waterfall",
+            "Province": "KZN"
+        },
+        "WorkAddress": {
+            "BuildingNumber": "12",
+            "StreetName": "Umngeni Road ",
+            "Area": "House",
+            "Code": "Waterfall",
+            "Province": "KZN"
+        },
+        "PostalAddress": {
+            "BuildingNumber": "2378 ",
+            "StreetName": " Post box Umngeni Road ",
+            "Area": "House",
+            "Code": "Waterfall",
+            "Province": "KZN"
+        },
+        "ContactNumbers": ["0987563873", "0798765758", "098756372", "9409472391"]
+    }
+
+
+]
