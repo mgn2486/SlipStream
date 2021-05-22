@@ -8,8 +8,8 @@
                 <ng-container *ngIf="listOfClients && listOfClients.length > 0 ; else noClientsBlock">
                     <div class="row">
                         <div class="col-lg-12">
-                            <button type='button' *ngFor='let client of listOfClients' (click)='onSelectedClient(client)' class="btn-outline-primary" [ngClass]="{' btn-outline-primary:active ': client?.Id === selectedClient?.Id}">
-                              {{ client.FirstName }} {{ client.LastName }} {{ client.Initials }}
+                            <button type='button' *ngFor='let client of listOfClients' (click)='onSelectedClient(client)' class="btn-outline-primary" [ngClass]="{' btn-outline-primary:active ': client?.id === selectedClient?.id}">
+                              {{ client.firstName }} {{ client.lastName }} {{ client.initials }}
                         </button>
                         </div>
                     </div>

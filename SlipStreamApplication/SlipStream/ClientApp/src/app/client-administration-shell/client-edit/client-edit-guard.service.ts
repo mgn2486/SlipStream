@@ -7,7 +7,7 @@ export class ClientEditGuard implements CanDeactivate<ClientEditComponent> {
 
     canDeactivate(component: ClientEditComponent): boolean {
         if (component.isDirty) {
-            const clientName = component.clientRecord && component.clientRecord.FirstName || 'New Client';
+            const clientName = component.clientRecord && component.clientRecord.firstName || 'New Client';
             return confirm(`Navigate away and lose all changes to ${clientName}?`);
         }
         return true;

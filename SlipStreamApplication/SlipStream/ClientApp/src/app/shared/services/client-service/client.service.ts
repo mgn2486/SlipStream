@@ -26,7 +26,7 @@ export class ClientService {
   getClients(): Observable<IClient[]> {
     let getAllClientsUrl = `${this.prodApiUrl}/api/clients`;
     console.log('we searcging', getAllClientsUrl);
-    return this._httpClient.get<IClient[]>(this.apiBaseUrl)
+    return this._httpClient.get<IClient[]>(getAllClientsUrl)
                            .pipe(
                               tap(data => console.log(JSON.stringify(data))),
                               catchError(this.handleError)
@@ -37,8 +37,9 @@ export class ClientService {
       if (clientId === "0") {
           return of(this.initializeClient());
       }
+      let getClientUrl = `${this.prodApiUrl}/api/clients/${clientId}`;
       const url = `${this.apiBaseUrl}/${clientId}`;
-      return this._httpClient.get<IClient>(url)
+      return this._httpClient.get<IClient>(getClientUrl)
                       .pipe(
                           tap(data => console.log('Data: ' + JSON.stringify(data))),
                           catchError(this.handleError)
@@ -47,7 +48,7 @@ export class ClientService {
 
   saveClientRecord(client: IClient) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    if (client.Id === "0") {
+    if (client.id === "0") {
         return this.createClient(client, headers);
     }
     return this.updateClient(client, headers);
@@ -61,7 +62,7 @@ export class ClientService {
                         .pipe(
                             tap(data => console.log('deleteClient' + clientId)),
                             tap(data => {
-                              const foundIndex = this.clientRecords.findIndex(item => item.Id === clientId );
+                              const foundIndex = this.clientRecords.findIndex(item => item.id === clientId );
                               if (foundIndex > -1) {
                                 this.clientRecords.splice(foundIndex, 1);
                                 this.changeSelectedClient(null);
@@ -72,7 +73,7 @@ export class ClientService {
   }
 
   private createClient(client: IClient, headers: HttpHeaders): Observable<IClient> {
-    client.Id = null;
+    client.id = null;
     return this._httpClient.post<IClient>(this.apiBaseUrl, client,  { headers: headers} )
                     .pipe(
                         tap(data => console.log('createclient: ' + JSON.stringify(data))),
@@ -85,26 +86,26 @@ export class ClientService {
   }
 
   private updateClient(client: IClient, headers: HttpHeaders): Observable<IClient> {
-      const url = `${this.apiBaseUrl}/${client.Id}`;
+      const url = `${this.apiBaseUrl}/${client.id}`;
       return this._httpClient.put<IClient>(url, client, { headers: headers} )
                       .pipe(
-                          tap(data => console.log('updateclient: ' + client.Id)),
+                          tap(data => console.log('updateclient: ' + client.id)),
                           catchError(this.handleError)
                       );
   }
 
   private initializeClient(): IClient {
       return {
-        Id: null,
-        FirstName: '',
-        LastName: '',
-        Initials: '',
-        Gender: 0,
-        PhotoUrl: '',
-        ResidentialAddress: null,
-        WorkAddress: null,
-        PostalAddress: null,
-        ContactNumbers: []
+        id: null,
+        firstName: '',
+        lastName: '',
+        initials: '',
+        gender: 0,
+        photoUrl: '',
+        residentialAddress: null,
+        workAddress: null,
+        postalAddress: null,
+        contactNumbers: []
       };
   }
 

@@ -1,22 +1,22 @@
 export interface IClient {
-  Id: string | null;
-  FirstName: string;
-  LastName: string;
-  Initials: string;
-  Gender: GenderEnum;
-  PhotoUrl: string;
-  ResidentialAddress: ClientAddress | null;
-  WorkAddress: ClientAddress | null;
-  PostalAddress: ClientAddress | null;
-  ContactNumbers: string[]
+  id: string | null;
+  firstName: string;
+  lastName: string;
+  initials: string;
+  gender: GenderEnum;
+  photoUrl: string;
+  residentialAddress: ClientAddress | null;
+  workAddress: ClientAddress | null;
+  postalAddress: ClientAddress | null;
+  contactNumbers: string[]
 }
 
 export interface ClientAddress {
-  BuildingNumber: string;
-  StreetName: string;
-  Area: string;
-  Code: string;
-  Province: string
+  buildingNumber: string;
+  streetName: string;
+  area: string;
+  code: string;
+  province: string
 }
 
 export enum GenderEnum {

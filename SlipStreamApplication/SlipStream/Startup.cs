@@ -36,8 +36,8 @@ namespace SlipStream
 
             ClusterHelper.Initialize(new ClientConfiguration
             {
-                Servers = new List<Uri> { new Uri("coucheBase://localhost")}
-            }, new PasswordAuthenticator("slipstreamuser","slipstream"));
+                Servers = new List<Uri> { new Uri("http://localhost:8091") }
+            }, new PasswordAuthenticator("Administrator", "password"));
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

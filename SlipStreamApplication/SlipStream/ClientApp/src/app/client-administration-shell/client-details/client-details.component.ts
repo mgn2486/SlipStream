@@ -43,7 +43,7 @@ export class ClientDetailsComponent implements OnInit {
   getClientAddress(address: ClientAddress | null) : string {
     if(address)
     {
-      let clientAddress = [address.BuildingNumber, address.StreetName, address.Code, address.Area, address.Province ].join("\n");
+      let clientAddress = [address.buildingNumber, address.streetName, address.code, address.area, address.province ].join("\n");
       return clientAddress;
     }else{
       return 'No Address Provided'

@@ -55,10 +55,10 @@ export class ClientEditComponent implements OnInit {
       this.originalClientDetails = client;
       this.clientRecord = Object.assign({}, client);
 
-      if (this.clientRecord.Id === "0") {
+      if (this.clientRecord.id === "0") {
           this.pageTitle = 'Add New Client';
       } else {
-          this.pageTitle = `Edit Client: ${this.clientRecord.FirstName}`;
+          this.pageTitle = `Edit Client: ${this.clientRecord.firstName}`;
       }
   }
 
@@ -68,9 +68,9 @@ export class ClientEditComponent implements OnInit {
   }
 
   deleteClient(): void {
-      if (this.clientRecord.Id) {
-          if (confirm(`Really delete the client: ${this.clientRecord.FirstName}?`)) {
-              this._clientService.deleteClient(this.clientRecord.Id)
+      if (this.clientRecord.id) {
+          if (confirm(`Really delete the client: ${this.clientRecord.firstName}?`)) {
+              this._clientService.deleteClient(this.clientRecord.id)
                   .subscribe(
                       () => this.onSaveComplete(),
                       (error: any) => this.errorMessage = <any>error

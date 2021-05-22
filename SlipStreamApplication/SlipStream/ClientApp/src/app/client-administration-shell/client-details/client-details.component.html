@@ -1,7 +1,7 @@
 <ng-container *ngIf="client ; else noClientSelectedBlock">
     <div class='panel panel-primary' *ngIf='client'>
         <div class='panel-heading'>
-            {{pageTitle + ': ' + client.LastName}}
+            {{pageTitle + ': ' + client.lastName}}
         </div>
 
         <div class='panel-body'>
@@ -9,39 +9,39 @@
                 <div class='col-md-8 col-lg-8'>
                     <div class='row'>
                         <div class='col-md-4'><b>First Name:</b></div>
-                        <div class='col-md-6'>{{client.FirstName }}</div>
+                        <div class='col-md-6'>{{client.firstName }}</div>
                     </div>
                     <div class='row'>
                         <div class='col-md-4'><b>Last Name:</b></div>
-                        <div class='col-md-6'>{{client.LastName }}</div>
+                        <div class='col-md-6'>{{client.lastName }}</div>
                     </div>
                     <div class='row'>
                         <div class='col-md-4'><b>Initials:</b></div>
-                        <div class='col-md-6'>{{ client.Initials }}</div>
+                        <div class='col-md-6'>{{ client.initials }}</div>
                     </div>
                     <div class='row'>
                         <div class='col-md-4'><b>Gender:</b></div>
-                        <div class='col-md-6'>{{ client.Gender | gender}}</div>
+                        <div class='col-md-6'>{{ client.gender | gender}}</div>
                     </div>
                     <div class='row'>
                         <hr>
                         <div class='col-md-4'><b>Residential Address:</b></div>
                         <div class='col-md-6'>
-                            <p>{{ getClientAddress(client.ResidentialAddress) }}</p>
+                            <p>{{ getClientAddress(client.residentialAddress) }}</p>
                         </div>
                     </div>
                     <div class='row'>
                         <hr>
                         <div class='col-md-4'><b>Work Address:</b></div>
                         <div class='col-md-6'>
-                            <p>{{ getClientAddress(client.WorkAddress) }}</p>
+                            <p>{{ getClientAddress(client.workAddress) }}</p>
                         </div>
                     </div>
                     <div class='row'>
                         <hr>
                         <div class='col-md-4'><b>Postal Address:</b></div>
                         <div class='col-md-6'>
-                            <p>{{ getClientAddress(client.PostalAddress) }}</p>
+                            <p>{{ getClientAddress(client.postalAddress) }}</p>
                         </div>
                     </div>
 
@@ -50,21 +50,21 @@
                         <div class='col-md-4'><b>Contact Numbers</b></div>
                         <div class='col-md-6'>
                             <ol>
-                                <li *ngFor="let contactNumber of client.ContactNumbers">{{ contactNumber }}</li>
+                                <li *ngFor="let contactNumber of client.contactNumbers">{{ contactNumber }}</li>
                             </ol>
                         </div>
                     </div>
                 </div>
 
                 <div class='col-md-4 col-lg-4'>
-                    <ng-container *ngIf='client.PhotoUrl; else noPhotoProvidedcBlock'>
-                        <img class='center-block img-responsive' [style.width.px]='200' [style.margin.px]='2' [src]='client.PhotoUrl' [title]='client.FirstName'>
+                    <ng-container *ngIf='client.photoUrl; else noPhotoProvidedcBlock'>
+                        <img class='center-block img-responsive' [style.width.px]='200' [style.margin.px]='2' [src]='client.photoUrl' [title]='client.firstName'>
                     </ng-container>
                     <ng-template #noPhotoProvidedcBlock>
-                        <div *ngIf="client.Gender == 1">
+                        <div *ngIf="client.gender == 1">
                             <img class='center-block img-responsive' src="assets/images/profile-photos/dummy/male.png">
                         </div>
-                        <div *ngIf="client.Gender == 2">
+                        <div *ngIf="client.gender == 2">
                             <img class='center-block img-responsive' src="assets/images/profile-photos/dummy/female.png">
                         </div>
                     </ng-template>
@@ -76,7 +76,7 @@
             <a class='btn btn-default navigation-buttons' style='width:80px' (click)='onBack()'>
                 <i class='glyphicon glyphicon-chevron-left'></i> Back
             </a>
-            <a class="btn btn-primary navigation-buttons" style="width:80px" [routerLink]="['/clients', client.Id, 'edit']">
+            <a class="btn btn-primary navigation-buttons" style="width:80px" [routerLink]="['/clients', client.id, 'edit']">
           Edit
       </a>
         </div>

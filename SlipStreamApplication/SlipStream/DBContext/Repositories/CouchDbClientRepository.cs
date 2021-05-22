@@ -16,13 +16,14 @@ namespace SlipStream.DBContext.Repositories
 
         public CouchDbClientRepository()
         {
-            _bucket = ClusterHelper.GetBucket("slipstream");
+            _bucket = ClusterHelper.GetBucket("slipstreambucket");
         }
 
         public IEnumerable<SlipClientModel> GetAllClients()
         {
-            var nlql = @"SELECT g.*, META(g).Id
-                        FROM IspClientTable";
+            var nlql = @"SELECT sc.*, META(sc).id
+                         FROM slipstreambucket sc
+                         WHERE sc.DocumentType = 'SlipClientModel' AND sc.Id IS NOT MISSING;";
 
             var query = QueryRequest.Create(nlql);
             query.ScanConsistency(ScanConsistency.RequestPlus);
@@ -42,12 +43,12 @@ namespace SlipStream.DBContext.Repositories
 
         public SlipClientModel EditOrUpdateClient(SlipClientModel clientDetails)
         {
-            if (string.IsNullOrEmpty(clientDetails.Id.ToString()) || clientDetails.Id.ToString().Equals("0"))
+            if (string.IsNullOrEmpty(clientDetails.Id) || clientDetails.Id.Equals("0"))
             {
-                clientDetails.Id = Guid.NewGuid();
+                clientDetails.Id = Guid.NewGuid().ToString();
             }
 
-            _bucket.Upsert<SlipClientModel>(clientDetails.Id.ToString(), clientDetails);
+            _bucket.Upsert<SlipClientModel>(clientDetails.Id, clientDetails);
 
             return clientDetails;
         }
@@ -55,7 +56,7 @@ namespace SlipStream.DBContext.Repositories
 
         public string RemoveClientById(string clientId)
         {
-            _bucket.Remove(clientId.ToString());
+            _bucket.Remove(clientId);
 
             return clientId;
         }

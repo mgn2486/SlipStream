@@ -11,23 +11,92 @@
 
                     <form class="form-horizontal" novalidate (ngSubmit)="saveClientRecord()">
                         <fieldset *ngIf="clientRecord">
-                            <div class="form-group" [ngClass]="{'has-error': (firstName.touched || firstName.dirty || clientRecord.Id !== '0') &&
+                            <div class="form-group" [ngClass]="{'has-error': (firstName.touched || firstName.dirty || clientRecord.id !== '0') &&
                                                !firstName.valid }">
-                                <label class="col-md-2 control-label" for="firstName">Client Name</label>
+                                <label class="col-md-2 control-label" for="firstName">Client First Name</label>
 
                                 <div class="col-md-8">
-                                    <input class="form-control" id="firstName" type="text" placeholder="Name (required)" required minlength="3" [(ngModel)]=clientRecord.FirstName name="firstName" #firstName="ngModel" />
+                                    <input class="form-control" id="firstName" type="text" placeholder="Name (required)" required minlength="3" [(ngModel)]=clientRecord.firstName name="firstName" #firstName="ngModel" />
                                     <span class="help-block" *ngIf="(firstName.touched ||
-                                                         firstName.dirty || clientRecord.Id !== '0') &&
+                                                         firstName.dirty || clientRecord.id !== '0') &&
                                                          firstName.errors">
-                            <span *ngIf="firstName.errors.required">
-                                Client first name is required.
-                            </span>
+                                      <span *ngIf="firstName.errors.required">
+                                          Client first name is required.
+                                      </span>
                                     <span *ngIf="firstName.errors.minlength">
-                                Client first name must be at least three characters.
-                            </span>
+                                          Client first name must be at least three characters.
+                                      </span>
                                     </span>
                                 </div>
+                            </div>
+
+                            <div class="form-group" [ngClass]="{'has-error': (lastName.touched || firstName.dirty || clientRecord.id !== '0') &&
+                                               !lastName.valid }">
+                                <label class="col-md-2 control-label" for="firstName">Client Last Name</label>
+
+                                <div class="col-md-8">
+                                    <input class="form-control" id="lastName" type="text" placeholder="Last Name (required)" required minlength="3" [(ngModel)]=clientRecord.lastName name="lastName" #lastName="ngModel" />
+                                    <span class="help-block" *ngIf="(lastName.touched || lastName.dirty || clientRecord.id !== '0') && lastName.errors">
+
+                                      <span *ngIf="lastName.errors.required">
+                                          Client last name is required.
+                                      </span>
+                                    <span *ngIf="lastName.errors.minlength">
+                                          Client last name must be at least three characters.
+                                      </span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group" [ngClass]="{'has-error': (initials.touched || firstName.dirty || clientRecord.id !== '0') &&
+                                               !lastName.valid }">
+                                <label class="col-md-2 control-label" for="firstName">Client Initials</label>
+
+                                <div class="col-md-8">
+                                    <input class="form-control" id="lastName" type="text" placeholder="Initials (required)" [(ngModel)]=clientRecord.initials name="initials" #initials="ngModel" />
+                                    <span class="help-block" *ngIf="(initials.touched || initials.dirty || clientRecord.id !== '0') && initials.errors">
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group" [ngClass]="{'has-error': (gender.touched || gender.dirty || clientRecord.id !== '0') &&
+                                               !gender.valid }">
+                                <label class="col-md-2 control-label" for="firstName">Client Gender</label>
+
+                                <div class="col-md-8">
+                                    <input class="form-control" id="gender" type="text" placeholder="Gender (required)" required [(ngModel)]=clientRecord.gender name="gender" #gender="ngModel" />
+                                    <span class="help-block" *ngIf="(gender.touched || gender.dirty || clientRecord.id !== '0') && gender.errors">
+
+                                      <span *ngIf="gender.errors.required">
+                                          Client Gender required.
+                                      </span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-2">
+
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <label class="radio-inline col-md-2 control-label">
+                                      <input type="radio" name="addressRadioBtn" value="homeAddress"/> Home Address
+                                    </label>
+
+                                        <label class="radio-inline col-md-2 control-label">
+                                      <input type="radio" name="addressRadioBtn" value="postalAddress"/> Postal Address
+                                    </label>
+
+                                        <label class="radio-inline col-md-2 control-label">
+                                      <input type="radio" name="addressRadioBtn" value="workAddress"/> Work Address
+                                    </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="descriptionId">Address</label>
                             </div>
 
                             <!--<div class="form-group" [ngClass]="{'has-error': (ClientCodeVar.touched ||
