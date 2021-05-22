@@ -24,14 +24,14 @@ namespace SlipStream.Controllers
 
         [HttpGet]
         [Route("api/clients/{clientId}")]
-        public IActionResult GetClientById()
+        public IActionResult GetClientById(string clientId)
         {
-            var slipClient = _couchDbClientRepository.GetAllClients();
+            var slipClient = _couchDbClientRepository.GetClientById(clientId);
 
             return Ok(slipClient);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("api/client/edit")]
         public IActionResult Edit([FromBody] SlipClientModel clientDetails)
         {

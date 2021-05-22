@@ -33,8 +33,8 @@ export class ClientService {
                            );
   }
 
-  getClientById(clientId: number) {
-      if (clientId === 0) {
+  getClientById(clientId: string) {
+      if (clientId === "0") {
           return of(this.initializeClient());
       }
       const url = `${this.apiBaseUrl}/${clientId}`;
@@ -47,13 +47,13 @@ export class ClientService {
 
   saveClientRecord(client: IClient) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    if (client.Id === 0) {
+    if (client.Id === "0") {
         return this.createClient(client, headers);
     }
     return this.updateClient(client, headers);
   }
 
-  deleteClient(clientId: number) {
+  deleteClient(clientId: string) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
         const url = `${this.apiBaseUrl}/${clientId}`;

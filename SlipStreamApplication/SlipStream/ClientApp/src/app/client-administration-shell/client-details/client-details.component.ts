@@ -23,7 +23,7 @@ export class ClientDetailsComponent implements OnInit {
 
     const param = this.route.snapshot.paramMap.get('id');
     if (param) {
-        const id = +param;
+        const id = param;
         this.getClientById(id);
     }
 
@@ -33,7 +33,7 @@ export class ClientDetailsComponent implements OnInit {
 
   }
 
-  getClientById(clientId: number) {
+  getClientById(clientId: string) {
     this.OurSubscription = this._clientService.getClientById(clientId).subscribe(
         client => this.client = client,
         error => this.errorMessage = <any>error

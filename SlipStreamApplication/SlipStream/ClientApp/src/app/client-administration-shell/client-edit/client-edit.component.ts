@@ -31,14 +31,14 @@ export class ClientEditComponent implements OnInit {
   ngOnInit(): void {
       this.route.params.subscribe(
           params => {
-              const id = +params['id'];
+              const id = params['id'];
               console.log('Do we have an id', id);
               this.getClientById(id);
           }
       );
   }
 
-  getClientById(id: number): void {
+  getClientById(id: string): void {
       this._clientService.getClientById(id)
           .subscribe(
               client => this.onClientRetrieved(client),
@@ -55,7 +55,7 @@ export class ClientEditComponent implements OnInit {
       this.originalClientDetails = client;
       this.clientRecord = Object.assign({}, client);
 
-      if (this.clientRecord.Id === 0) {
+      if (this.clientRecord.Id === "0") {
           this.pageTitle = 'Add New Client';
       } else {
           this.pageTitle = `Edit Client: ${this.clientRecord.FirstName}`;

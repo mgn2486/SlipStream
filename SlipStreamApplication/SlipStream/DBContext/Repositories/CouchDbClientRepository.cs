@@ -35,7 +35,7 @@ namespace SlipStream.DBContext.Repositories
 
         public SlipClientModel GetClientById(string clientId)
         {
-            var result = _bucket.Get<SlipClientModel>(clientId.ToString());
+            var result = _bucket.Get<SlipClientModel>(clientId);
 
             return result.Value;
         }

@@ -11,15 +11,14 @@
 
                     <form class="form-horizontal" novalidate (ngSubmit)="saveClientRecord()">
                         <fieldset *ngIf="clientRecord">
-                            <div class="form-group" [ngClass]="{'has-error': (firstName.touched ||
-                                               firstName.dirty || clientRecord.Id !== 0) &&
+                            <div class="form-group" [ngClass]="{'has-error': (firstName.touched || firstName.dirty || clientRecord.Id !== '0') &&
                                                !firstName.valid }">
                                 <label class="col-md-2 control-label" for="firstName">Client Name</label>
 
                                 <div class="col-md-8">
                                     <input class="form-control" id="firstName" type="text" placeholder="Name (required)" required minlength="3" [(ngModel)]=clientRecord.FirstName name="firstName" #firstName="ngModel" />
                                     <span class="help-block" *ngIf="(firstName.touched ||
-                                                         firstName.dirty || clientRecord.Id !== 0) &&
+                                                         firstName.dirty || clientRecord.Id !== '0') &&
                                                          firstName.errors">
                             <span *ngIf="firstName.errors.required">
                                 Client first name is required.
@@ -30,7 +29,6 @@
                                     </span>
                                 </div>
                             </div>
-
 
                             <!--<div class="form-group" [ngClass]="{'has-error': (ClientCodeVar.touched ||
                                                ClientCodeVar.dirty || clientRecord.Id !== 0) &&
