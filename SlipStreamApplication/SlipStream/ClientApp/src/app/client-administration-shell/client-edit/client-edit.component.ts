@@ -1,11 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
-import { IClient } from 'src/app/shared/models/client-model/client.model';
+import { ClientAddress, IClient } from 'src/app/shared/models/client-model/client.model';
 import { ClientService } from 'src/app/shared/services/client-service/client.service';
-import { UserService } from 'src/app/shared/services/user-service/user.service';
 
 @Component({
   selector: 'app-client-edit',
@@ -18,6 +15,11 @@ export class ClientEditComponent implements OnInit {
   errorMessage: string='';
   private originalClientDetails!: IClient;
   clientRecord!: IClient;
+  residentialAddress!: ClientAddress;
+  postalAddress!: ClientAddress;
+  workAddress!: ClientAddress;
+  addressType:string='homeAddress';
+
 
   get isDirty(): boolean {
       return this.editForm.dirty ? true : false;
@@ -59,6 +61,15 @@ export class ClientEditComponent implements OnInit {
           this.pageTitle = 'Add New Client';
       } else {
           this.pageTitle = `Edit Client: ${this.clientRecord.firstName}`;
+          if(this.clientRecord.residentialAddress) {
+            this.residentialAddress = this.clientRecord.residentialAddress;
+          }
+          if(this.clientRecord.postalAddress) {
+            this.postalAddress = this.clientRecord.postalAddress;
+          }
+          if(this.clientRecord.workAddress) {
+            this.workAddress = this.clientRecord.workAddress;
+          }
       }
   }
 
@@ -98,6 +109,15 @@ export class ClientEditComponent implements OnInit {
       // Reset back to pristine
       this.editForm.reset(this.editForm.value);
       this.router.navigate(['/products']);
+  }
+
+  showAddress(addressType: string) {
+    this.addressType = addressType;
+    console.log('Address to show', addressType)
+  }
+
+  getSelectedAddressType() {
+    return this.addressType;
   }
 
   onBack() {

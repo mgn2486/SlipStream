@@ -76,20 +76,19 @@
 
                             <div class="row">
                                 <div class="col-sm-2">
-
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label class="radio-inline col-md-2 control-label">
-                                      <input type="radio" name="addressRadioBtn" value="homeAddress"/> Home Address
+                                      <input type="radio" name="addressRadioBtn" value="homeAddress" (click)="showAddress('homeAddress')" checked/> Home Address
                                     </label>
 
                                         <label class="radio-inline col-md-2 control-label">
-                                      <input type="radio" name="addressRadioBtn" value="postalAddress"/> Postal Address
+                                      <input type="radio" name="addressRadioBtn" value="postalAddress" (click)="showAddress('postalAddress')"/> Postal Address
                                     </label>
 
                                         <label class="radio-inline col-md-2 control-label">
-                                      <input type="radio" name="addressRadioBtn" value="workAddress"/> Work Address
+                                      <input type="radio" name="addressRadioBtn" value="workAddress" (click)="showAddress('workAddress')"/> Work Address
                                     </label>
                                     </div>
                                 </div>
@@ -97,31 +96,213 @@
 
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="descriptionId">Address</label>
-                            </div>
+                                <div class="col-md-8">
+                                    <ng-container [ngSwitch]="getSelectedAddressType()">
+                                        <div class="form-group" *ngSwitchCase="'homeAddress'">
 
-                            <!--<div class="form-group" [ngClass]="{'has-error': (ClientCodeVar.touched ||
-                                               ClientCodeVar.dirty || clientRecord.Id !== 0) &&
-                                               !ClientCodeVar.valid }">
-                                <label class="col-md-2 control-label" for="ClientCodeId">Client Code</label>
- <div class="col-md-8">
-                                    <input class="form-control" id="ClientCodeId" type="text" placeholder="Code (required)" required [(ngModel)]=Client.ClientCode name="ClientCode" #ClientCodeVar="ngModel" />
-                                    <span class="help-block" *ngIf="(ClientCodeVar.touched ||
-                                                         ClientCodeVar.dirty || Client.Id !== 0) &&
-                                                         ClientCodeVar.errors">
-                            <span *ngIf="ClientCodeVar.errors.required">
-                                Client code is required.
-                            </span>
-                                    </span>
+                                            <div class="form-group">
+                                                <div class="col-md-8">
+                                                    <div [ngClass]="{'has-error': (resBuildingNumber.touched || resBuildingNumber.dirty || residentialAddress.buildingNumber !== null) && !resBuildingNumber.valid }">
+                                                        <label class="col-md-3 control-label" for="resBuildingNumber">Building No.</label>
+
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" id="resBuildingNumber" type="text" placeholder="Initials (required)" [(ngModel)]=residentialAddress.buildingNumber name="resBuildingNumber" #resBuildingNumber="ngModel" />
+                                                            <span class="help-block" *ngIf="(resBuildingNumber.touched || resBuildingNumber.dirty || clientRecord.id !== '0') && resBuildingNumber.errors">
+                                                          </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-8">
+                                                    <div [ngClass]="{'has-error': (resStreetName.touched || resStreetName.dirty || residentialAddress.streetName !== null) && !resStreetName.valid }">
+                                                        <label class="col-md-3 control-label" for="resBuildingNumber">Street.</label>
+
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" id="resStreetName" type="text" placeholder="Street Name (required)" [(ngModel)]=residentialAddress.streetName name="resStreetName" #resStreetName="ngModel" />
+                                                            <span class="help-block" *ngIf="(resStreetName.touched || resStreetName.dirty || clientRecord.id !== '0') && resStreetName.errors">
+                                                      </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-8">
+                                                    <div [ngClass]="{'has-error': (resArea.touched || resArea.dirty || residentialAddress.area !== null) && !resArea.valid }">
+                                                        <label class="col-md-3 control-label" for="resBuildingNumber">Area.</label>
+
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" id="resStreetName" type="text" placeholder="Area Name (required)" [(ngModel)]=residentialAddress.area name="resArea" #resArea="ngModel" />
+                                                            <span class="help-block" *ngIf="(resArea.touched || resArea.dirty || clientRecord.id !== '0') && resArea
+                                                            .errors">
+                                                      </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-8">
+                                                    <div [ngClass]="{'has-error': (resCode.touched || resCode.dirty || residentialAddress.code !== null) && !resCode.valid }">
+                                                        <label class="col-md-3 control-label" for="resCode">Code.</label>
+
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" id="resCode" type="text" placeholder="Area Code (required)" [(ngModel)]=residentialAddress.code name="resCode" #resCode="ngModel" />
+                                                            <span class="help-block" *ngIf="(resCode.touched || resCode.dirty || clientRecord.id !== '0') && resCode.errors">
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-8">
+                                                    <div [ngClass]="{'has-error': (resProvince.touched || resProvince.dirty || residentialAddress.province !== null) && !resCode.valid }">
+                                                        <label class="col-md-3 control-label" for="resCode">Province.</label>
+
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" id="resProvince" type="text" placeholder="Area Province (required)" [(ngModel)]=residentialAddress.province name="resProvince" #resProvince="ngModel" />
+                                                            <span class="help-block" *ngIf="(resProvince.touched || resProvince.dirty || clientRecord.id !== '0') && resProvince.errors">
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group" *ngSwitchCase="'postalAddress'">
+
+                                            <div class="form-group">
+                                                <div class="col-md-8">
+                                                    <div [ngClass]="{'has-error': (postalBuildingNumber.touched || postalBuildingNumber.dirty || postalAddress.buildingNumber !== null) && !postalBuildingNumber.valid }">
+                                                        <label class="col-md-3 control-label" for="resBuildingNumber">Building No.</label>
+
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" id="postalBuildingNumber" type="text" placeholder="Box number (required)" [(ngModel)]=postalAddress.buildingNumber name="postalBuildingNumber" #postalBuildingNumber="ngModel" />
+                                                            <span class="help-block" *ngIf="(postalBuildingNumber.touched || postalBuildingNumber.dirty || clientRecord.id !== '0') && postalBuildingNumber.errors">
+                                                        </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-8">
+                                                    <div [ngClass]="{'has-error': (resStreetName.touched || resStreetName.dirty || postalAddress.streetName !== null) && !resStreetName.valid }">
+                                                        <label class="col-md-3 control-label" for="resBuildingNumber">Street.</label>
+
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" id="resStreetName" type="text" placeholder="Street Name (required)" [(ngModel)]=postalAddress.streetName name="resStreetName" #resStreetName="ngModel" />
+                                                            <span class="help-block" *ngIf="(resStreetName.touched || resStreetName.dirty || clientRecord.id !== '0') && resStreetName.errors">
+                                                    </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-8">
+                                                    <div [ngClass]="{'has-error': (resArea.touched || resArea.dirty || postalAddress.area !== null) && !resArea.valid }">
+                                                        <label class="col-md-3 control-label" for="resBuildingNumber">Area.</label>
+
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" id="resStreetName" type="text" placeholder="Area Name (required)" [(ngModel)]=postalAddress.area name="resArea" #resArea="ngModel" />
+                                                            <span class="help-block" *ngIf="(resArea.touched || resArea.dirty || clientRecord.id !== '0') && resArea
+                                                          .errors">
+                                                    </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-8">
+                                                    <div [ngClass]="{'has-error': (resCode.touched || resCode.dirty || postalAddress.code !== null) && !resCode.valid }">
+                                                        <label class="col-md-3 control-label" for="resCode">Code.</label>
+
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" id="resCode" type="text" placeholder="Area Code (required)" [(ngModel)]=postalAddress.code name="resCode" #resCode="ngModel" />
+                                                            <span class="help-block" *ngIf="(resCode.touched || resCode.dirty || clientRecord.id !== '0') && resCode.errors">
+                                                          </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-8">
+                                                    <div [ngClass]="{'has-error': (resProvince.touched || resProvince.dirty || postalAddress.province !== null) && !resCode.valid }">
+                                                        <label class="col-md-3 control-label" for="resCode">Province.</label>
+
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" id="resProvince" type="text" placeholder="Area Province (required)" [(ngModel)]=postalAddress.province name="resProvince" #resProvince="ngModel" />
+                                                            <span class="help-block" *ngIf="(resProvince.touched || resProvince.dirty || clientRecord.id !== '0') && resProvince.errors">
+                                                          </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group" *ngSwitchCase="'workAddress'">
+
+                                            <div class="form-group">
+                                                <div class="col-md-8">
+                                                    <div [ngClass]="{'has-error': (postalBuildingNumber.touched || postalBuildingNumber.dirty || workAddress.buildingNumber !== null) && !postalBuildingNumber.valid }">
+                                                        <label class="col-md-3 control-label" for="resBuildingNumber">Building No.</label>
+
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" id="postalBuildingNumber" type="text" placeholder="Box number (required)" [(ngModel)]=workAddress.buildingNumber name="postalBuildingNumber" #postalBuildingNumber="ngModel" />
+                                                            <span class="help-block" *ngIf="(postalBuildingNumber.touched || postalBuildingNumber.dirty || clientRecord.id !== '0') && postalBuildingNumber.errors">
+                                                  </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-8">
+                                                    <div [ngClass]="{'has-error': (resStreetName.touched || resStreetName.dirty || workAddress.streetName !== null) && !resStreetName.valid }">
+                                                        <label class="col-md-3 control-label" for="resBuildingNumber">Street.</label>
+
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" id="resStreetName" type="text" placeholder="Street Name (required)" [(ngModel)]=workAddress.streetName name="resStreetName" #resStreetName="ngModel" />
+                                                            <span class="help-block" *ngIf="(resStreetName.touched || resStreetName.dirty || clientRecord.id !== '0') && resStreetName.errors">
+                                              </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-8">
+                                                    <div [ngClass]="{'has-error': (resArea.touched || resArea.dirty || workAddress.area !== null) && !resArea.valid }">
+                                                        <label class="col-md-3 control-label" for="resBuildingNumber">Area.</label>
+
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" id="resStreetName" type="text" placeholder="Area Name (required)" [(ngModel)]=workAddress.area name="resArea" #resArea="ngModel" />
+                                                            <span class="help-block" *ngIf="(resArea.touched || resArea.dirty || clientRecord.id !== '0') && resArea
+                                                    .errors">
+                                              </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-8">
+                                                    <div [ngClass]="{'has-error': (resCode.touched || resCode.dirty || workAddress.code !== null) && !resCode.valid }">
+                                                        <label class="col-md-3 control-label" for="resCode">Code.</label>
+
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" id="resCode" type="text" placeholder="Area Code (required)" [(ngModel)]=workAddress.code name="resCode" #resCode="ngModel" />
+                                                            <span class="help-block" *ngIf="(resCode.touched || resCode.dirty || clientRecord.id !== '0') && resCode.errors">
+                                                    </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-8">
+                                                    <div [ngClass]="{'has-error': (resProvince.touched || resProvince.dirty || workAddress.province !== null) && !resCode.valid }">
+                                                        <label class="col-md-3 control-label" for="resCode">Province.</label>
+
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" id="resProvince" type="text" placeholder="Area Province (required)" [(ngModel)]=workAddress.province name="resProvince" #resProvince="ngModel" />
+                                                            <span class="help-block" *ngIf="(resProvince.touched || resProvince.dirty || clientRecord.id !== '0') && resProvince.errors">
+                                                    </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </ng-container>
                                 </div>
-                            </div>-->
-
-                            <div class="form-group">
-                                <label class="col-md-2 control-label" for="descriptionId">Description</label>
-
-                                <!-- <div class="col-md-8">
-                                    <textarea class="form-control" id="descriptionId" placeholder="Description" rows=3 [(ngModel)]=Client.description name="description">
-                        </textarea>
-                                </div> -->
                             </div>
 
                             <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
