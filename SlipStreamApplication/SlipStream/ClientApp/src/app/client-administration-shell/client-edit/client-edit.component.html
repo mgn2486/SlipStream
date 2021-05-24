@@ -303,6 +303,23 @@
 
                                     </ng-container>
                                 </div>
+
+
+                                <div class="form-group col-md-12" [ngClass]="{'has-error': (gender.touched || gender.dirty || clientRecord.id !== '0') &&
+                                               !gender.valid }">
+                                    <label class="col-md-2 control-label" for="firstName">Contact Details</label>
+
+                                    <div class="col-md-8">
+                                        <input class="form-control" id="gender" type="text" placeholder="Gender (required)" required [(ngModel)]=clientRecord.gender name="gender" #gender="ngModel" />
+                                        <span class="help-block" *ngIf="(gender.touched || gender.dirty || clientRecord.id !== '0') && gender.errors">
+
+                                      <span *ngIf="gender.errors.required">
+                                          Client Gender required.
+                                      </span>
+                                        </span>
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>

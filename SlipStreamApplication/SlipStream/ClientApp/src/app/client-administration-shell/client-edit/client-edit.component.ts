@@ -11,7 +11,7 @@ import { ClientService } from 'src/app/shared/services/client-service/client.ser
 })
 export class ClientEditComponent implements OnInit {
   @ViewChild(NgForm) editForm!: NgForm;
-  pageTitle: string = 'Product Edit';
+  pageTitle = 'Add New Client';
   errorMessage: string='';
   private originalClientDetails!: IClient;
   clientRecord!: IClient;
@@ -19,6 +19,7 @@ export class ClientEditComponent implements OnInit {
   postalAddress!: ClientAddress;
   workAddress!: ClientAddress;
   addressType:string='homeAddress';
+  contactDetailsList: string [] = [];
 
 
   get isDirty(): boolean {
@@ -49,13 +50,13 @@ export class ClientEditComponent implements OnInit {
   }
 
   onClientRetrieved(client: IClient): void {
-      // Reset back to pristine
+
       this.editForm.reset();
 
-      // Display the data in the form
-      // Use a copy to allow cancel.
       this.originalClientDetails = client;
       this.clientRecord = Object.assign({}, client);
+
+      this.contactDetailsList = this.clientRecord.contactNumbers;
 
       if (this.clientRecord.id === "0") {
           this.pageTitle = 'Add New Client';
@@ -74,13 +75,12 @@ export class ClientEditComponent implements OnInit {
   }
 
   cancel(): void {
-      // Navigate back to the product list
       this.router.navigate(['/clients']);
   }
 
   deleteClient(): void {
       if (this.clientRecord.id) {
-          if (confirm(`Really delete the client: ${this.clientRecord.firstName}?`)) {
+          if (confirm(`Do you really want to delete the client: ${this.clientRecord.firstName}?`)) {
               this._clientService.deleteClient(this.clientRecord.id)
                   .subscribe(
                       () => this.onSaveComplete(),
@@ -93,6 +93,12 @@ export class ClientEditComponent implements OnInit {
   }
 
   saveClientRecord(): void {
+
+    this.clientRecord.contactNumbers = this.contactDetailsList !== null ? this.contactDetailsList: [];
+    this.clientRecord.residentialAddress = this.residentialAddress !== null ? this.residentialAddress: null;
+    this.clientRecord.postalAddress = this.postalAddress !== null ? this.postalAddress: null;;
+    this.clientRecord.workAddress = this.workAddress !== null ? this.workAddress: null;;
+
       if (this.editForm.valid) {
           this._clientService.saveClientRecord(this.clientRecord)
               .subscribe(() => {
@@ -108,7 +114,7 @@ export class ClientEditComponent implements OnInit {
   onSaveComplete(): void {
       // Reset back to pristine
       this.editForm.reset(this.editForm.value);
-      this.router.navigate(['/products']);
+      this.router.navigate(['/clients']);
   }
 
   showAddress(addressType: string) {
