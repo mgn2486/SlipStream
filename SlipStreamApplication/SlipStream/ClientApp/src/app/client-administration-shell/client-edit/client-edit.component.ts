@@ -10,11 +10,11 @@ import { ClientService } from 'src/app/shared/services/client-service/client.ser
   styleUrls: ['./client-edit.component.css']
 })
 export class ClientEditComponent implements OnInit {
-  @ViewChild(NgForm) editForm!: NgForm;
+  @ViewChild('editForm') editForm!: NgForm;
   pageTitle = 'Add New Client';
   errorMessage: string='';
   private originalClientDetails!: IClient;
-  clientRecord!: IClient;
+  clientRecord: IClient = this.setDefaultValuesForModel();
   residentialAddress!: ClientAddress;
   postalAddress!: ClientAddress;
   workAddress!: ClientAddress;
@@ -29,6 +29,8 @@ export class ClientEditComponent implements OnInit {
   constructor(private _clientService: ClientService,
               private router: Router,
               private route: ActivatedRoute) {
+
+                this.setDefaultValuesForModel();
   }
 
   ngOnInit(): void {
@@ -51,26 +53,29 @@ export class ClientEditComponent implements OnInit {
 
   onClientRetrieved(client: IClient): void {
 
-      this.editForm.reset();
+    this.editForm && this.editForm.reset();
 
       this.originalClientDetails = client;
       this.clientRecord = Object.assign({}, client);
 
       this.contactDetailsList = this.clientRecord.contactNumbers;
 
+      if(this.clientRecord.residentialAddress) {
+        this.residentialAddress = this.clientRecord.residentialAddress;
+      }
+      if(this.clientRecord.postalAddress) {
+        this.postalAddress = this.clientRecord.postalAddress;
+      }
+      if(this.clientRecord.workAddress) {
+        this.workAddress = this.clientRecord.workAddress;
+      }
+
+
       if (this.clientRecord.id === "0") {
           this.pageTitle = 'Add New Client';
       } else {
           this.pageTitle = `Edit Client: ${this.clientRecord.firstName}`;
-          if(this.clientRecord.residentialAddress) {
-            this.residentialAddress = this.clientRecord.residentialAddress;
-          }
-          if(this.clientRecord.postalAddress) {
-            this.postalAddress = this.clientRecord.postalAddress;
-          }
-          if(this.clientRecord.workAddress) {
-            this.workAddress = this.clientRecord.workAddress;
-          }
+
       }
   }
 
@@ -109,6 +114,25 @@ export class ClientEditComponent implements OnInit {
       } else {
           this.errorMessage = 'Please correct the validation errors.';
       }
+  }
+
+  setDefaultValuesForModel(): IClient{
+    let clientRecord: IClient;
+
+    clientRecord = {
+      id : '',
+      firstName: '',
+      lastName: '',
+      initials: '',
+      gender: 1,
+      photoUrl: '',
+      residentialAddress : null,
+      workAddress : null,
+      postalAddress: null,
+      contactNumbers :[]
+    }
+
+    return clientRecord;
   }
 
   onSaveComplete(): void {
